@@ -1,0 +1,128 @@
+@import "fonts";
+@import "nullstyle";
+@import "variables";
+@import "mixsins";
+
+html,
+body {
+    font-family: $font-family;
+    font-size: 16px;
+    font-weight: 400;
+	color: #000;
+	background-color: $color1;
+}
+
+/*--------------------------------Common--------------------------------*/
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: 1197px;
+
+    @include table {
+        padding-right: 20px;
+        padding-left: 20px;
+        max-width: 767px;
+    }
+
+    @include mobile {
+        padding-right: 10px;
+        padding-left: 10px;
+        max-width: 100%;
+    }
+}
+
+.global-wrap {
+	width: 100%;
+	min-height: 100vh;
+}
+
+.flex {
+	display: flex;
+}
+
+.vl-center {
+	display: flex;
+	align-items: center;
+}
+
+.title-1 {
+	font-size: 40px;
+	line-height: (30/40);
+}
+
+.title-2 {
+	font-size: 36px;
+	line-height: (30/36);
+	color: $color3;
+	text-transform: uppercase;
+}
+
+.title-2--line {
+	position: relative;
+	padding-bottom: 29px;
+	@extend .title-2;
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 1px;
+		width: 182px;
+		background-color: $color2;
+	} 	
+}
+
+/*--------------------------------Other--------------------------------*/
+@import "./components/btns";
+@import "./components/blocks.scss";
+@import "./components/header";
+@import "./components/_footer.sass";
+
+.over-header {
+	position: relative;
+	font-family: $font-family2;
+	font-size: 14px;
+	color: $color3;
+	background-color: #e9e9e9;
+	box-shadow: 0 0 9px rgba($color1, 0.51);
+
+	.container,
+	&__item {
+		display: flex;
+		align-items: center;
+	}
+
+	.container {
+		height: 46px;
+	}
+
+	&__item {
+		margin-right: 36px;
+
+		&:first-child {
+			margin-right: auto;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		&-tel {
+			white-space: nowrap;
+		}
+	}
+
+	&__ic {
+		display: inline-block;
+		margin-right: 9px;
+	}
+}
+
+.products {
+	&__title {
+		margin-bottom: 60px;
+	}
+}
+
