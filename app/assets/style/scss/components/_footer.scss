@@ -26,6 +26,14 @@ footer {
 	}
 
 .#{&} {
+	&__bottom {
+		margin-top: 34px;
+		font-size: 12px;
+		font-family: $font-family2;
+		font-weight: 400;
+		color: $color2;
+	}
+
 	&__col {
 
 		&:nth-of-type(2) {
@@ -82,7 +90,7 @@ footer {
 
 			&--mail{
 				text-transform: lowercase;
-				
+
 				&::before {
 					width: 15px; 
 					height: 11px;
