@@ -6,6 +6,42 @@
 	align-items: center;
 }
 
+.v-up {
+	cursor: pointer;
+	position: fixed;
+	right: 70px;
+	bottom: 70px;
+	z-index: 1000;
+	width: 88px;
+	height: 88px;
+	background-color: $color1;
+	border-radius: 50%;
+	box-shadow: 0 0 18px rgba($color2, 0.47);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity $duration;
+
+	&.active {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+
+	&::before {
+		cursor: pointer;
+		position: absolute;
+		content: '';
+		top: 50%;
+		left: 50%;
+		width: 46.59%;
+		height: 46.59%;
+		background-image: url('./../../img/icons/arrow-down.png');
+		background-repeat: no-repeat;
+		background-size: contain;
+		transform: translate(-50%, -50%);
+	}
+}
+
 .logo {
 	display: inline-block;
 	width: 273px;
@@ -69,12 +105,12 @@
 	justify-content: center;
 	background-color: $color3;
 
-	.container {
+	&__list {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		margin: 0 -20px -20px 0;
-		padding: 84px 9px 145px;
+		padding: 84px 9px 182px;
 	}
 
 	&__item {
@@ -120,6 +156,11 @@
 		display: flex;
 		flex-direction: column;		
 		height: 100%;
+	}
+
+	&__slide {
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
 
 	&__card {
@@ -194,17 +235,36 @@
 }
 
 .products {
-	display: flex;
-	justify-content: center;
+	margin-bottom: 140px;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center 132%;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 
 	.container {
 		display: flex;
-		flex-wrap: wrap;
-		margin:0 -40px 0 0;
+		flex-direction: column;
 	}
 
 	&__title {
+		margin-bottom: 60px;
 		width: 100%;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-right: -40px;
+	}
+
+	& {
+		&__btn {
+			align-self: center;
+			margin-top: 50px;
+		}
 	}
 }
 
@@ -214,6 +274,7 @@
 	margin: 0 40px 36px 0;
 	width: calc(50% - 40px);
 	text-align: center;
+	background-color: $color1;
 	box-shadow: 0 0 13px rgba($color2, 0.31);
 
 	&__name {
@@ -233,7 +294,10 @@
 
 	&__content {
 		position: relative;
+		display: flex;
+		flex-direction: column;
 		padding: 25px 32px 27px;
+		height: 100%;
 	}
 
 	&__discount {
@@ -247,6 +311,7 @@
 		padding: 0 0 35px;
 		height: 240px;
 		width: 68%;
+		background-origin: content-box;
 		background-repeat: no-repeat;
 		background-size: contain;
 		background-position: center;
@@ -255,7 +320,22 @@
 	&__desc {
 		display: flex;
 		justify-content: space-between;
+		margin-bottom: auto;
 		line-height: 1;
+
+		&-text {
+			font-size: 18px;
+			line-height: 1.8;	
+			color: #585858;
+			text-align: left;
+		}
+
+		&-img {
+			width: 38px;
+			height: 31px;
+			background-image: url('./../../img/icons/desc-sprite.png');
+			background-repeat: no-repeat;
+		}
 
 		&-item {
 			display: flex;
@@ -263,50 +343,48 @@
 			align-items: center;
 			justify-content: flex-end;
 
-		}
-
-		&-img {
-			width: 38px;
-			height: 31px;
-			background-repeat: no-repeat;
-
-			&--length {
+			&--length .product__desc-img {
 				width: 38px; 
 				height: 16px;
-				background: url('./../../img/icons/desc-sprite.png') -55px -10px;
+				background-position: -55px -10px;
 			}
-			
-			&--width {
+
+			&--width .product__desc-img {
 				width: 13px; 
 				height: 31px;
-				background: url('./../../img/icons/desc-sprite.png') -10px -99px;
+				background-position: -10px -99px;
 			}
 
-			&--depth {
+			&--depth .product__desc-img {
 				width: 23px; 
 				height: 22px;
-    			background: url('./../../img/icons/desc-sprite.png') -10px -57px;
+				background-position: -10px -57px;
 			}
 
-			&--vol {
-				width: 16px; height: 23px;
-    			background: url('./../../img/icons/desc-sprite.png') -43px -99px;
+			&--vol .product__desc-img {
+				width: 16px; 
+				height: 23px;
+				background-position: -43px -99px;
 			}
 
-			&--weight {
-				width: 25px; height: 27px;
-    			background: url('./../../img/icons/desc-sprite.png') -10px -10px;
+			&--weight .product__desc-img {
+				width: 25px; 
+				height: 27px;
+				background-position: -10px -10px;
 			}
 
-			&--capacity {
-				width: 20px; height: 23px;
-    			background: url('./../../img/icons/desc-sprite.png') -113px -10px;
+			&--capacity .product__desc-img {
+				width: 20px; 
+				height: 23px;
+				background-position: -113px -10px;
 			}
 
-			&--bake {
-				width: 16px; height: 24px;
-    			background: url('./../../img/icons/desc-sprite.png') -113px -53px;
+			&--bake .product__desc-img {
+				width: 16px; 
+				height: 24px;
+				background-position: -113px -53px;
 			}
+
 		}
 
 		&-name, 
@@ -351,3 +429,4 @@
 		margin-top: 32px;
 	}
 }
+
