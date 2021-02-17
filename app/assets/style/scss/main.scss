@@ -26,8 +26,8 @@ body {
     }
 
     @include mobile {
-        padding-right: 10px;
-        padding-left: 10px;
+        padding-right: 30px;
+        padding-left: 30px;
         max-width: 100%;
     }
 }
@@ -37,7 +37,7 @@ body {
 	flex-direction: column;
 	width: 100%;
 	min-height: 100vh;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .flex {
@@ -49,9 +49,21 @@ body {
 	align-items: center;
 }
 
+.fw-bold {
+	font-weight: 700
+}
+
+.color-select {
+	color: $color2;
+}
+
 .title-1 {
 	font-size: 40px;
 	line-height: (30/40);
+
+	@include mobile {
+		font-size: 30px;
+	}
 }
 
 .title-2 {
@@ -59,6 +71,16 @@ body {
 	line-height: (30/36);
 	color: $color3;
 	text-transform: uppercase;
+
+	@include mobile {
+		font-size: 20px;
+		line-height: (31/20);
+	}
+}
+
+.title-1 {
+	font-size: 26px;
+	line-height: (30/26);
 }
 
 .title-2--line {
@@ -81,6 +103,11 @@ body {
 	font-size: 18px;
 	line-height: (30/18);
 	color: $color3;
+
+	@include mobile {
+		font-size: 16px;
+		line-height: (25/16);
+	}
 }
 
 /*--------------------------------Other--------------------------------*/
@@ -127,29 +154,15 @@ body {
 		display: inline-block;
 		margin-right: 9px;
 	}
-}
 
-.products-container {
-	position: relative;
-	padding-top: 105px;
-
-	&:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: -110px;
-		width: 100%;
-		height: 300px;
-		background-image: url('./../../img/volna-white.png');
-		background-repeat: no-repeat;
-		background-size: 101% auto;
-		background-position: 0 0;
+	@include table {
+		display: none;
 	}
 }
 
-.products {
-	&__title {
-		margin-bottom: 60px;
+.global-wrap {
+	.bread-crumb {
+		margin: 31px 0 71px;
 	}
 }
 
@@ -166,7 +179,28 @@ body {
 		margin-top: 32px;
 	}
 
-	&__img-list {
+	&__slider {
+		width: 100%;
+
+		&-prev,
+		&-next {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			opacity: 0.8;
+		}
+
+		&-prev {
+			left: 9.5px;
+		}
+
+		&-next {
+			right: 9.5px;
+			transform: scaleX(-1);
+		}
+	}
+
+	.swiper-wrapper {
 		position: relative;
 		display: grid;
 		grid-template-columns: repeat(4, 25%);
@@ -183,27 +217,77 @@ body {
 		}
 	}
 
-	&__img-item {
+	&__slide {
+		position: relative;
 		padding-top: 100%;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: right top;
+		
+		img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: right top;
+		}
 	}
 
 	&__btn {
 		margin: 72px auto 0;
 	}
+
+	@include mobile {
+		margin-top: 96px;
+		padding-bottom: 67px;
+
+		.container {
+			display: flex;
+			flex-direction: column;
+		}
+	
+		&__text {
+			margin-top: 32px;
+		}
+
+		&__slider {
+			margin: 34px -30px 0;
+			width: auto;
+		}
+	
+		.swiper-wrapper {
+			display: -webkit-box;
+			grid-template-columns: repeat(4, 25%);
+			margin-top: 0;
+	
+			&::before {
+				display: none;
+			}
+		}
+	
+		&__slide {
+			padding-top: 0;
+			height: 249px;
+			width: auto;
+				
+			img {
+				object-position: center;
+			}
+		}
+	
+		&__btn {
+			margin: 50px auto 0;
+		}
+	}
 }
 
 .advantages {
-	padding: 70px 0 0;
+	padding: 70px 0 235px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
 
 	&__list-wrap {
-		margin-top: 15px;
-		padding: 60px 0 235px;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center top;
+		margin-top: 75px;
 	}
 
 	&__list {
@@ -247,4 +331,131 @@ body {
 			color: #000;
 		}
 	}
+
+	@include table {
+		padding: 50px 0 185px;
+
+		&__list-wrap {
+			margin-top: 36px;
+		}
+
+		&__list {
+			flex-direction: column;
+			margin: 0;
+		}
+
+		&__item {
+			display: flex;
+			align-items: center;
+			margin: 0 0 27px 0;
+			padding: 11px 10px 11px 24px;
+			min-height: 97px;
+			width: 100%;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&-img {
+				margin-right: 24px;
+				width: 85px;
+    			max-width: 51px;
+   				height: 60px;
+			}
+
+			&-name {
+				font-size: 17.19px;
+			}
+
+			&-text {
+				font-size: 14.95px;
+			}
+		}
+	}
+
+	@include mobile {
+		padding: 20px 0 149px;
+	}
+}
+
+.main-page {
+	.products-container {
+		position: relative;
+		z-index: 1;
+		padding-top: 105px;
+	
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			z-index: -1;
+			width: 100%;
+		}
+	
+		&::before {
+			top: -110px;
+			height: 300px;
+			background-image: url('./../../img/volna-white.png');
+			background-repeat: no-repeat;
+			background-size: 101% auto;
+			background-position: 0 0;
+		}
+	
+		&::after {
+			display: none;
+			top: -70px;
+			width: 100%;
+			height: 150px;
+			background-color: #fff;
+		}
+
+		@include table {
+			padding-top: 0;
+		}
+	
+		@include tel {
+			.main-page & {
+				padding-top: 0;
+	
+				&::after {
+					display: block;
+				}
+			}	
+		}
+	}
+
+	.products {
+		&__title {
+			margin-bottom: 60px;
+		}
+	}
+
+	footer {
+		margin-top: -127px;
+
+		@include mobile {
+			margin-top: -45px;
+		}
+
+		@include tel {
+			margin-top: -87px;
+		}
+	}
+}
+
+.cupeli-page {
+	.products {
+		background-position: 100% 98.5%;
+
+		&__title {
+			margin-bottom: 48px;
+		}
+
+		&__btn {
+			margin-top: 150px;
+		}
+	}
+
+
 }

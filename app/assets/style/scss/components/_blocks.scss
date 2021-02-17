@@ -1,52 +1,193 @@
 @import "./../variables";
 @import "./../mixsins";
 
-%vl-centr {
-	display: flex;
-	align-items: center;
-}
-
-.v-up {
-	cursor: pointer;
-	position: fixed;
-	right: 70px;
-	bottom: 70px;
-	z-index: 1000;
-	width: 88px;
-	height: 88px;
-	background-color: $color1;
-	border-radius: 50%;
-	box-shadow: 0 0 18px rgba($color2, 0.47);
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity $duration;
-
-	&.active {
-		opacity: 1;
-		pointer-events: all;
-	}
-
-
-	&::before {
-		cursor: pointer;
-		position: absolute;
-		content: '';
-		top: 50%;
-		left: 50%;
-		width: 46.59%;
-		height: 46.59%;
-		background-image: url('./../../img/icons/arrow-down.png');
-		background-repeat: no-repeat;
-		background-size: contain;
-		transform: translate(-50%, -50%);
-	}
-}
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//логотип
 .logo {
 	display: inline-block;
 	width: 273px;
+
+	@include table {
+		width: 182px;
+	}
 }
 
+.burger-block {
+	@include vl-center;
+
+	@include table {
+		position: absolute;
+		z-index: 100;
+		top: calc(100% - 1px);
+		left: 0;
+		right: 0;
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
+		padding: 50px 0 64px;
+		max-height: calc(100vh - 90px);
+		overflow: auto; 
+		background-color: $color2;
+		transform: translateX(-101%);
+		transition-property: background-color, transform;
+		transition-duration: $duration;
+
+		&.active {
+			background-color: $color3;
+			transform: translateX(0);
+		}
+	}
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Темный фон при открытии бургера
+.bg-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.4);
+	transform: translateX(-100%);
+	transition: transform $duration;
+
+	.burger-block.active + & {
+		transform: translateX(0);
+	}
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Главное меню
+.menu {
+	display: flex;
+	align-items: center;
+
+	&__item {
+		position: relative;
+		margin-right: 18px;
+		font-size: 16px;
+		line-height: 1.2;
+		font-weight: 300;
+		color: $color2;
+		text-transform: uppercase;
+		white-space: nowrap;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: calc(100% + 2px);
+			left: 0;
+			height: 3px;
+			width: 0;
+			background-color: $color2;
+			border-radius: 1.5px;
+			transition: width $duration, transform $duration;
+		}
+
+		&.active::before,
+		&:hover::before {
+			width: 50%;
+			transform: translateX(100%);
+		}
+	}
+
+	@include table {
+		display: grid;
+		grid-template-columns: auto;
+		margin-bottom: 50px;
+		width: 100%;
+		text-align: center;
+		//background-color: #333;
+	
+		&__item {
+			margin-right: 0;
+			line-height: 50px;
+			transition: background-color $duration, color $duration;
+	
+			&:hover {
+				color: $color1;
+				background-color: $color2;
+			}
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+}
+
+.hamburger {
+	cursor: pointer;
+	position: relative;
+	display: none;
+	
+	&__bar {
+		display: block;
+		margin: 10px auto;
+		width: 42px;
+		height: 2px;
+		background-color: $color2;
+		transition: all $duration ease-in-out;
+
+		.hamburger.active &:nth-child(2) {
+			opacity: 0;
+		}
+
+		.hamburger.active &:nth-child(1) {
+			transform: translateY(12px) rotate(45deg);
+		}
+
+		.hamburger.active &:nth-child(3) {
+			transform: translateY(-12px) rotate(-45deg);
+		}
+	}
+
+	@include table {
+		display: block;
+	}
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Главное меню
+.bread-crumb  {
+	.container {
+		display: flex;
+		font-size: 12px;
+		line-height: 1;
+		color: $color3;
+		text-transform: uppercase;
+	}
+	
+	&__item {
+		position: relative;
+		margin-right: 25px;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: calc(100% + 11px);
+			width: 4px;
+			height: 8px;
+			background-image: url('./../../img/icons/breadcrumb-arrow.png');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			transform: translateY(-50%);
+		}
+
+		&:last-child {
+			margin-right: 0;
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Акция 
 .discount {
 	position: relative;
 	display: flex;
@@ -84,71 +225,14 @@
 		border-radius: 50%;
 		transform: translate(-50%, -50%);
 	}
-}
 
-.menu {
-	display: flex;
-	align-items: center;
-
-	&__item {
-		margin-right: 18px;
-		font-size: 16px;
-		line-height: (30/16);
-		font-weight: 300;
-		color: $color2;
-		text-transform: uppercase;
+	@include mobile {
+		transform: scale(0.83);
 	}
 }
 
-.catalog {
-	display: flex;
-	justify-content: center;
-	background-color: $color3;
-
-	&__list {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		margin: 0 -20px -20px 0;
-		padding: 84px 9px 182px;
-	}
-
-	&__item {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin: 0 20px 20px 0;
-		padding: 10px;
-		min-height: 192px;
-		width: 292px;
-		background-color: $color1;
-		box-shadow: 0 0 9px rgba($color1, 0.51);
-
-		&-img {
-			margin: 0 auto;
-			height: 120px;
-			width: 170px;
-
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-				object-position: center bottom;
-			}
-		}
-
-		&-title {
-			margin-top: auto;
-			padding-top: 10px;
-			font-size: 20px;
-			line-height: (30/20);
-			color: $color3;
-			text-transform: uppercase;
-			text-align: center;
-		}
-	}
-}
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Главный слайдер
 .slider-main {
 	height: 605px;
 
@@ -170,15 +254,20 @@
 		padding: 70px 34px 50px;
 		background-color: rgba($color1, 0.9);
 		color: $color3;
+		box-shadow: 0 0 16px rgba($color2, 0.63);
 
 		&-title {
 			color: $color2;
 		}
 
-		&-text {
-			margin-top: 35px;
+		&-text,
+		&-tel {
 			font-size: 20px;
 			line-height: (30/20);
+		}
+
+		&-text {
+			margin-top: 35px;
 			color: $color3;
 		}
 
@@ -189,7 +278,6 @@
 		&-tel {
 			position: relative;
 			padding-left: 30px;
-			margin-bottom: 15px;
 
 			&:last-child {
 				margin-bottom: 0;
@@ -232,17 +320,145 @@
 			}
 		}
 	}
+
+	@include table {
+		height: 550px;
+
+		&__card {
+			width: 100%;
+		}
+	}
+
+	@include mobile {
+		height: 377px;
+		box-shadow: 0 0 13px rgba($color2, 0.63);
+
+		.container {
+			padding: 0;
+		} 
+
+		&__card {
+			padding: 60px 35px 20px;
+			min-height: auto;
+			height: 100%;
+			background-color: rgba(255,255,255,0.6);
+			text-align: center;
+			box-shadow: none;
+	
+			&-text {
+				margin-top: 40px;
+				font-size: 16px;
+				line-height: (25/16);
+			}
+	
+			&-tels {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-top: 35px;
+			}
+		}
+	}
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+//Категории товаров
+.catalog {
+	display: flex;
+	justify-content: center;
+	background-color: $color3;
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: 0 -20px -20px 0;
+		padding: 84px 9px 182px;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0 20px 20px 0;
+		padding: 10px;
+		min-height: 192px;
+		width: 292px;
+		background-color: $color1;
+		box-shadow: 0 0 9px rgba($color1, 0.51);
+		transition: box-shadow $duration;
+
+		&:hover {
+			box-shadow: 0 0 13px rgba($color2, 1);
+		}
+
+		&-img {
+			margin: 0 auto;
+			height: 120px;
+			width: 170px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				object-position: center bottom;
+			}
+		}
+
+		&-title {
+			margin-top: auto;
+			padding-top: 10px;
+			font-size: 20px;
+			line-height: (30/20);
+			color: $color3;
+			text-transform: uppercase;
+			text-align: center;
+		}
+	}
+
+	@include table {
+		&__list {
+			justify-content: center;
+		}
+	}
+
+	@include mobile {
+		&__list {
+			flex-direction: column;
+			align-items: center;
+			margin: 0;
+			padding: 54px 0 155px;
+		}
+
+		&__item {
+			margin: 0 0 70px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.products-container {
+	.products {
+		margin-bottom: 70px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	@include mobile {
+		margin-bottom: 87px;
+	}
 }
 
 .products {
-	margin-bottom: 140px;
+	padding-bottom: 70px;
 	background-repeat: no-repeat;
 	background-size: 100% auto;
-	background-position: center 132%;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
+	background-position: center 95%;
 
 	.container {
 		display: flex;
@@ -254,16 +470,55 @@
 		width: 100%;
 	}
 
+	&__text {
+		margin-bottom: 70px;
+		p {
+			margin-bottom: 30px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
 	&__list {
 		display: flex;
 		flex-wrap: wrap;
-		margin-right: -40px;
+		margin: 0 -40px -36px 0;
 	}
 
-	& {
+	&__product {
+		margin: 0 40px 36px 0;
+	}
+
+	
+	&__btn {
+		align-self: center;
+		margin-top: 87px;
+	}
+
+	@include mobile {
+		padding-bottom: 20px;
+		background-position: center bottom;
+
+		&__title {
+			margin-bottom: 43px;
+		}
+
+		&__list {
+			margin: 0;
+		}
+
+		&__product {
+			margin: 0 0 44px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
 		&__btn {
-			align-self: center;
-			margin-top: 50px;
+			margin-top: 61px;
 		}
 	}
 }
@@ -271,7 +526,6 @@
 .product {
 	display: flex;
 	flex-direction: column;
-	margin: 0 40px 36px 0;
 	width: calc(50% - 40px);
 	text-align: center;
 	background-color: $color1;
@@ -319,11 +573,12 @@
 
 	&__desc {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		margin-bottom: auto;
 		line-height: 1;
 
 		&-text {
+			margin-right: auto;
 			font-size: 18px;
 			line-height: 1.8;	
 			color: #585858;
@@ -338,10 +593,12 @@
 		}
 
 		&-item {
+			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: flex-end;
+			max-width: 105px;
 
 			&--length .product__desc-img {
 				width: 38px; 
@@ -393,7 +650,7 @@
 		}
 
 		&-name {
-			margin-top: 13px;
+			margin-top: 13.81px;
 			font-size: 12.9px;
 			font-weight: 300;
 			color: $color2;
@@ -401,7 +658,8 @@
 
 		&-val {
 			margin-top: 9px;
-			font-size: 14.7px;
+			font-size: 15.72px;
+			font-weight: 700;
 			color: #585858;
 		}
 	}
@@ -427,6 +685,125 @@
 		display: flex;
 		justify-content: space-between;
 		margin-top: 32px;
+	}
+
+	@include table {
+		width: 100%;
+	}
+
+	@include mobile {
+
+		&__name {
+			padding: 0 25px;
+			min-height: 82px;
+			font-family: $font-family2;
+			font-size: 16px;
+			line-height: (20/16);
+		}
+
+		&__content {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			padding: 18px 25px 20px;
+		}
+
+		&__discount {
+			top: 11px;
+			left: 14px;
+		}
+
+		&__img {
+			padding: 0 0 28px;
+			height: 135px;
+			background-position: center bottom;
+		}
+
+		&__desc {
+
+			&-text {
+				font-size: 13.13px;
+				line-height: 1.8;	
+			}
+
+			&-img {
+				transform: scale(0.71);
+			}
+
+			&-item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-end;
+
+				&--length .product__desc-img {
+					width: 38px; 
+					height: 16px;
+					background-position: -55px -10px;
+				}
+
+				&--width .product__desc-img {
+					width: 13px; 
+					height: 31px;
+					background-position: -10px -99px;
+				}
+
+				&--depth .product__desc-img {
+					width: 23px; 
+					height: 22px;
+					background-position: -10px -57px;
+				}
+
+				&--vol .product__desc-img {
+					width: 16px; 
+					height: 23px;
+					background-position: -43px -99px;
+				}
+
+				&--weight .product__desc-img {
+					width: 25px; 
+					height: 27px;
+					background-position: -10px -10px;
+				}
+
+				&--capacity .product__desc-img {
+					width: 20px; 
+					height: 23px;
+					background-position: -113px -10px;
+				}
+
+				&--bake .product__desc-img {
+					width: 16px; 
+					height: 24px;
+					background-position: -113px -53px;
+				}
+
+			}
+
+			&-name {
+				margin-top: 9px;
+				font-size: 9.45px;
+			}
+
+			&-val {
+				margin-top: 6px;
+				font-size: 10.75px;
+			}
+		}
+
+		&__price {
+			margin-top: 30px;
+			font-size: 14px;
+			line-height: 1;
+			
+			&-val--old {
+				margin-left: 13px;
+			}
+		}
+
+		&__btns {
+			margin-top: 23px;
+		}
 	}
 }
 
