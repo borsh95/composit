@@ -5,21 +5,6 @@ header {
 	height: 112px;
 	background-color: $color3;
 
-	&.fixed {
-		position: fixed;
-		top: 0;
-		right: 0;
-		left: 0;
-		z-index: 100;
-		transform: translateY(-100%);
-		//transition: transform 0.3s;
-	}
-
-	&.visible {
-		transform: translateY(0);
-		transition: transform $duration;
-	}
-
 	.container,
 	.header__burger-block {
 		display: flex;
@@ -28,37 +13,55 @@ header {
 
 	@at-root .#{&} {
 		&__logo {
+			flex-shrink: 1;
 			margin-right: auto;
 		}
 
 		&__tels {
+			flex-shrink: 0.8;
 			display: none;
 			align-items: center;
-			margin: 0 13px;
+			margin: 0 20px 0 20px;
+			width: 110px;
 
-			a {
+			a  {
 				display: block;
-				background-image: url('../../img/sci/tel-sprite.png');
 			}
 
-			&-viber {
-				width: 33px; 
-				height: 35px;
-				background-position: -10px -67px;
+			&-viber,
+			&-wtApp,
+			&-tel {
+				width: 100%;
+				max-width: 29px;
 			}
 
 			&-wtApp {
 				margin: 0 10px 0 13px;
-				width: 35px; 
-				height: 34px;
-				background-position: -67px -10px;
 			}
 
-			&-tel {
-				width: 37px; 
-				height: 37px;
-				background-position: -10px -10px;
-			}
+			// a {
+			// 	display: block;
+			// 	background-image: url('../../img/sci/tel-sprite.png');
+			// }
+
+			// &-viber {
+			// 	width: 30px; 
+			// 	height: 32px;
+			// 	background-position: -10px -10px;
+			// }
+
+			// &-wtApp {
+			// 	margin: 0 10px 0 13px;
+			// 	width: 30px; 
+			// 	height: 29px;
+			// 	background-position: -110px -10px;
+			// }
+
+			// &-tel {
+			// 	width: 30px; 
+			// 	height: 30px;
+			// 	background-position: -60px -10px;
+			// }
 		}
 
 		&__sci {

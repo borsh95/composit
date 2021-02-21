@@ -38,10 +38,9 @@ function images() {
 
 function scripts() {
 	return src([
-		'node_modules/swiper/swiper-bundle.js',
-		'app/assets/js/main.js'
+		'app/assets/js/index.js'
 	])
-		.pipe(concat('main.min.js'))
+		.pipe(concat('main.js'))
 		.pipe(uglify())
 		.pipe(dest('app/assets/js'))
 		.pipe(browserSync.stream())
@@ -49,12 +48,11 @@ function scripts() {
 
 function styles() {
 	return src([
-		'node_modules/swiper/swiper-bundle.css',
 		'app/assets/style/scss/main.scss'
 	])
 		.pipe(sourcemaps.init())
-		.pipe(scss({ outputStyle: 'compressed' }))
-		.pipe(concat('style.min.css'))
+		.pipe(scss())
+		.pipe(concat('style.css'))
 		.pipe(autoprefixer({
 			overrideBrowserslist: ['last 10 version'],
 			grid: true
@@ -66,9 +64,9 @@ function styles() {
 
 function build() {
 	return src([
-		'app/assets/style/css/style.min.css',
+		'app/assets/style/css/style.css',
 		'app/assets/fonts/**/*',
-		'app/assets/js/main.min.js',
+		'app/assets/js/main.js',
 		'app/*.html'
 	], { base: 'app' })
 		.pipe(dest('dist'))
@@ -76,7 +74,7 @@ function build() {
 
 function watching() {
 	watch(['app/assets/style/scss/**/*.scss'], styles);
-	watch(['app/assets/js/**/*.js', '!app/assets/js/main.min.js'], scripts);
+	watch(['app/assets/js/**/*.js', '!app/assets/js/main.js'], scripts);
 	watch(['app/*.html']).on('change', browserSync.reload);
 }
 

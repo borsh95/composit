@@ -10,6 +10,37 @@ body {
     font-weight: 400;
 	color: #000;
 	background-color: $color1;
+	scrollbar-color: $lightColor2 rgba(0,0,0,0.15);     /* «цвет ползунка» «цвет полосы скроллбара» */
+	scrollbar-width: auto;  /* толщина */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 14px; /* ширина для вертикального скролла */
+    height: 14px; /* высота для горизонтального скролла */
+    background-color: rgba(0,0,0,0.15);
+}
+
+html::-webkit-scrollbar-thumb, 
+body::-webkit-scrollbar-thumb {
+    background-color: $lightColor2;
+	box-shadow: inset 1px 1px 10px rgba(0,0,0,0.15);
+	
+	&:hover {
+		background-color: darken($lightColor2, 10%);
+	}
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+ 
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
 }
 
 /*--------------------------------Common--------------------------------*/
@@ -26,8 +57,8 @@ body {
     }
 
     @include mobile {
-        padding-right: 30px;
-        padding-left: 30px;
+        padding-right: 25px;
+        padding-left: 25px;
         max-width: 100%;
     }
 }
@@ -54,21 +85,33 @@ body {
 }
 
 .color-select {
-	color: $color2;
+	color: $lightColor2;
+}
+
+a[href^="tel:"],
+a[href^="mailto:"] {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .title-1 {
 	font-size: 40px;
 	line-height: (30/40);
+	font-weight: 400;
 
 	@include mobile {
 		font-size: 30px;
+		line-height: 1;
 	}
 }
 
 .title-2 {
 	font-size: 36px;
 	line-height: (30/36);
+	font-weight: 400;
 	color: $color3;
 	text-transform: uppercase;
 
@@ -76,11 +119,6 @@ body {
 		font-size: 20px;
 		line-height: (31/20);
 	}
-}
-
-.title-1 {
-	font-size: 26px;
-	line-height: (30/26);
 }
 
 .title-2--line {
@@ -99,9 +137,19 @@ body {
 	} 	
 }
 
+.title-3 {
+	font-size: 26px;
+	line-height: (30/26);
+
+	@include mobile {
+		font-size: 23px;
+	}
+}
+
 .text {
 	font-size: 18px;
 	line-height: (30/18);
+	font-weight: 400;
 	color: $color3;
 
 	@include mobile {
@@ -110,12 +158,16 @@ body {
 	}
 }
 
-/*--------------------------------Other--------------------------------*/
-@import "./components/btns";
-@import "./components/blocks.scss";
-@import "./components/header";
-@import "./components/_footer.scss";
 
+/*--------------------------------Other--------------------------------*/
+@import "./components/_btns";
+@import "./components/_blocks";
+@import "./components/_header";
+@import "./components/_footer";
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~
+Блок на шапокой с адресами
+~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .over-header {
 	position: relative;
 	font-family: $font-family2;
@@ -160,12 +212,16 @@ body {
 	}
 }
 
+
 .global-wrap {
 	.bread-crumb {
 		margin: 31px 0 71px;
 	}
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~
+Галерея портфолио на главной странице
+~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .portfolio {
 	margin-top: 120px;
 	padding-bottom: 68px;
@@ -204,7 +260,6 @@ body {
 		position: relative;
 		display: grid;
 		grid-template-columns: repeat(4, 25%);
-		margin-top: 55px;
 
 		&::before {
 			content: '';
@@ -250,14 +305,13 @@ body {
 		}
 
 		&__slider {
-			margin: 34px -30px 0;
+			margin: 34px -25px 0;
 			width: auto;
 		}
 	
 		.swiper-wrapper {
 			display: -webkit-box;
 			grid-template-columns: repeat(4, 25%);
-			margin-top: 0;
 	
 			&::before {
 				display: none;
@@ -280,6 +334,9 @@ body {
 	}
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~
+Преимущества на главной старнице
+~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .advantages {
 	padding: 70px 0 235px;
 	background-repeat: no-repeat;
@@ -293,13 +350,13 @@ body {
 	&__list {
 		display: flex;
 		flex-wrap: wrap;
-		margin: 0 -95px -25px 0;
+		margin: 0 0 -25px -95px;
 	}
 
 	&__item {
 		display: flex;
 		align-items: center;
-		margin: 0 95px 25px 0;
+		margin: 0 0 25px 95px;
 		padding: 24px 10px 15px 24px;
 		width: calc(50% - 95px);
 		min-height: 126px;
@@ -378,6 +435,7 @@ body {
 	}
 }
 
+/*Главная страница*/
 .main-page {
 	.products-container {
 		position: relative;
@@ -412,22 +470,36 @@ body {
 
 		@include table {
 			padding-top: 0;
+
+			&::before {
+				top: -100px;;
+			}
 		}
 	
 		@include tel {
-			.main-page & {
-				padding-top: 0;
-	
-				&::after {
-					display: block;
-				}
-			}	
+			padding-top: 0;
+
+			&::before {
+				top: -88px;;
+			}
+
+			&::after {
+				display: block;
+			}
 		}
 	}
 
 	.products {
 		&__title {
 			margin-bottom: 60px;
+		}
+	}
+
+	.portfolio__slider {
+		margin-top: 55px;
+
+		@include table{
+			margin-top: 40px;
 		}
 	}
 
@@ -444,7 +516,8 @@ body {
 	}
 }
 
-.cupeli-page {
+/*Купели страница*/
+.kupeli-page {
 	.products {
 		background-position: 100% 98.5%;
 
@@ -457,5 +530,48 @@ body {
 		}
 	}
 
+	.info {
+		margin-bottom: 180px;
+	}	
 
+	@include table {
+		main {
+			padding-top: 60px;
+		}
+
+		.info {
+			margin-bottom: 110px;
+		}
+	}
 }
+
+/*Бассейны страница*/
+.pool-page	{
+	.products__title {
+		margin-bottom: 67px;
+	}
+
+	.filters {
+		margin-bottom: 73px;
+	}
+
+	.info {
+		margin-top: 76px;
+	}
+
+	.products {
+		padding-bottom: 270px;
+		background-position: center 99.8%;
+
+		&__btn {
+			margin-top: 137px;
+		}
+	}
+
+	@include table {
+		main {
+			padding-top: 60px;
+		}
+	}
+}
+
