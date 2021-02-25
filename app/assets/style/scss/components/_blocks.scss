@@ -119,7 +119,8 @@
 			margin-right: 0;
 			line-height: 50px;
 			transition: background-color $duration, color $duration;
-	
+			
+			&.active,
 			&:hover {
 				color: $color1;
 				background-color: $color2;
@@ -429,6 +430,85 @@
 		}
 	}
 }
+
+/*Слайдер производства*/
+.production-slider	{
+	padding: 0 46px;
+	height: 221px;
+	background-color: $color1;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: -5px;
+		bottom: -5px;
+		z-index: 8;
+		width: 35px;
+		background-color: $color1;
+	}
+
+	&::before {
+		left: -3px;
+	}
+
+	&::after {
+		right: -3px;
+	}
+
+	&__slider {
+		img {
+			width: 100%;
+			height: 100%;
+			object-position: center;
+			object-fit: cover;
+		}
+	}
+
+	&__arrow {
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		z-index: 10;
+		width: 45px;
+		height: 50px;
+		background-image: url('./../../img/production/left-arrow.png');
+		background-repeat: no-repeat;
+		background-size: 22px 37px;
+		background-position: left center;
+		transform: translateY(-50%);
+		transition: opacity $duration;
+
+		&.swiper-button-disabled {
+			opacity: 0.3;
+		}
+
+		&--left {
+			left: 0;
+			
+		}
+
+		&--right {
+			right: 0;
+			transform: scaleX(-1) translateY(-50%);
+		}
+	}
+
+	@include mobile {
+		padding: 0 30px;
+
+		&::after,
+		&::before {
+			width: 30px;
+		}
+
+		&__arrow {
+			width: 30px;
+			background-size: 16px auto;
+		}
+	}
+}
+
 
 /*Категории товаров*/
 .catalog {
@@ -883,6 +963,18 @@
 		margin-top: 30px;
 		padding-left: 21px;
 
+		&.info-list--large {
+			.info__list-item {
+				font-size: 24px;
+				line-height: (30/24);
+				font-weight: 300;
+			}
+
+			@include table {
+				font-size: 22px;
+			}
+		}
+
 		@at-root ul #{&}-item {
 			position: relative;
 			padding-left: 15px;
@@ -897,6 +989,10 @@
 
 		@at-root ol #{&}-item {
 			list-style: decimal inside;
+		}
+
+		@at-root .list-item__text {
+			margin: 34px 0 25px;
 		}
 	}
 
@@ -916,6 +1012,10 @@
 		&__list {
 			margin-top: 25px;
 			padding-left: 18px;
+
+			@at-root .list-item__text {
+				margin: 27px 0 18px;
+			}
 		}
 
 		&__text {
@@ -924,6 +1024,74 @@
 
 		&__video-list {
 			margin-top: 25px;
+		}
+	}
+}
+
+/*Информация прямоком на странице*/
+.info-page {
+	$parent: &;
+
+	&__title {
+		font-size: 24px;
+		line-height: (30/24);
+		font-weight: 300;
+		color: $color3;
+
+		#{$parent}__text + & {
+			margin-top: 39px;
+		}
+	}
+
+	&__text {
+		margin-top: 39px;
+
+		&:nth-of-type(1) {
+			margin-top: 0;
+		}
+
+		#{$parent}__title + & {
+			margin-top: 39px;
+		}
+	}
+
+	&__list {
+		position: relative;
+
+		&-item {
+			list-style: decimal;
+			list-style-position: inside;
+			margin-bottom: 20px;
+			line-height: (20/18);
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&::marker {
+				color: #3da3d7;
+			}
+		}
+	}
+
+	@include mobile {
+		&__title {
+			font-size: 22px;
+		}
+
+		#{$parent}__text + & {
+			margin-top: 28px;
+		}
+
+		&__text {
+			&,
+			#{$parent}__title + & {
+				margin-top: 28px;
+			}
+		}
+
+		&__list-item {
+			margin-bottom: 15px;
 		}
 	}
 }
@@ -1137,6 +1305,7 @@
 
 		&.filters-depth {
 			margin-top: 31px;
+			margin-bottom: auto;
 		}
 
 		&-title {
@@ -1164,7 +1333,8 @@
 	}
 
 	&__btn {
-		margin: auto auto 0;
+		justify-self: flex-end;
+		margin: 15px auto 0;
 	}
 
 	@at-root .filters-price {
@@ -1213,7 +1383,6 @@
 
 	@at-root .filters-inputs {
 		display: flex;
-		flex-wrap: wrap;
 
 		&__label {
 			display: flex;
@@ -1247,12 +1416,23 @@
 		}
 
 		@include tel {
+			// display: grid;
+			// grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+			// grid-gap: 15px 30px;
+			// // flex-direction: column;
+
+			// // &__label:first-child {
+			// // 	margin-bottom: 15px;
+			// // }
+
 			&__text {
 				font-size: 18px;
+				margin-right: 8px
 			}
 
 			&__input {
 				font-size: 16px;
+				width: 75px;
 			}
 		}
 

@@ -47,6 +47,10 @@ footer {
 
 	&__col {
 
+		&-catalog &-item:hover {
+			color:#009fe3;
+		}
+
 		&:nth-of-type(1) .footer__col-title + .footer__col-item {
 			margin-bottom: 19px;
 			font-family: $font-family2;
@@ -58,7 +62,7 @@ footer {
 			font-size: 20px;
 			line-height: (27.34/20);
 			font-weight: 300;
-			color: $color2;
+			color: #009fe3;
 			text-transform: uppercase;
 		}
 
@@ -71,6 +75,7 @@ footer {
 			font-weight: 400;
 			color: $color1;
 			text-transform: uppercase;
+			transition: color $duration;
 
 			&:last-child {
 				margin-bottom: 0;
@@ -164,5 +169,9 @@ footer {
 				margin-top: 37px;
 			}
 		}
+	}
+
+	@include tel {
+		padding-top: 30px;
 	}
 }

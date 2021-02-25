@@ -108,7 +108,8 @@ a[href^="mailto:"] {
 	}
 }
 
-.title-2 {
+.title-2, 
+.title-2--line {
 	font-size: 36px;
 	line-height: (30/36);
 	font-weight: 400;
@@ -124,7 +125,6 @@ a[href^="mailto:"] {
 .title-2--line {
 	position: relative;
 	padding-bottom: 29px;
-	@extend .title-2;
 
 	&::before {
 		content: '';
@@ -140,9 +140,10 @@ a[href^="mailto:"] {
 .title-3 {
 	font-size: 26px;
 	line-height: (30/26);
+	font-weight: 400;
 
 	@include mobile {
-		font-size: 23px;
+		font-size: 18px;
 	}
 }
 
@@ -173,7 +174,7 @@ a[href^="mailto:"] {
 	font-family: $font-family2;
 	font-size: 14px;
 	color: $color3;
-	background-color: #e9e9e9;
+	background-color:$color1;
 	box-shadow: 0 0 9px rgba($color1, 0.51);
 
 	.container,
@@ -434,7 +435,16 @@ a[href^="mailto:"] {
 		padding: 20px 0 149px;
 	}
 }
+main {
+	[class*="-page"]:not(.main-page) & {
+		padding-bottom: 165px;
 
+		@include table {
+			padding-top: 60px;
+			padding-bottom: 100px;
+		}
+	}
+}
 /*Главная страница*/
 .main-page {
 	.products-container {
@@ -511,7 +521,7 @@ a[href^="mailto:"] {
 		}
 
 		@include tel {
-			margin-top: -87px;
+			margin-top: -37px;
 		}
 	}
 }
@@ -572,6 +582,200 @@ a[href^="mailto:"] {
 		main {
 			padding-top: 60px;
 		}
+
+		.products {
+			padding-bottom: 150px;
+	
+			&__btn {
+				margin-top: 100px;
+			}
+		}
+
+		.info {
+			margin-top: 50px;
+		}
+	}
+
+	@include mobile {
+
+		.products-container {
+			margin-bottom: 0;
+		}
+
+		.products {
+			background-position: center 98.7%; 
+		}
+	}
+
+	@include tel {
+		.products {
+			padding-bottom: 100px;
+			background-position: center 98.8%; 
+		}
 	}
 }
 
+/*Павильоны страница*/
+.pavilions-page	{
+	main {
+		padding-bottom: 165px;
+	}
+
+	.products {
+		&__title {
+			margin-bottom: 63px;
+		}
+
+		&__btn {
+			margin-top: 130px;
+		}
+	}
+
+	.info {
+		margin-top: 15px;
+	}
+
+	@include table {
+		main {
+			padding-top: 60px;
+			padding-bottom: 110px;
+		}
+
+		.products {
+			&__btn {
+				margin-top: 100px;
+			}
+		}
+
+		.info {
+			margin-top: 50px;
+		}
+	}
+
+	@include mobile {
+		main {
+			padding-bottom: 110px;
+		}
+
+		.products {
+			&__btn {
+				margin-top: 100px;
+			}
+		}
+	}
+}
+
+/*О нас страница*/
+.about-us-page	{
+	main {
+		padding-bottom: 165px;
+	}
+
+	.info-page {
+		margin-top: 64px;
+	}
+
+	@include table {
+		main {
+			padding-top: 60px;
+			padding-bottom: 110px;
+		}
+
+		.info-page {
+			margin-top: 50px;
+		}
+	}
+}
+
+/*Производство*/
+.production-page {
+	&__slider {
+		margin: 77px 0 81px;
+	}
+
+	.info-page__title {
+		font-size: 26px;
+		font-weight: 400;
+		line-height: (30/26);
+	}
+
+	.title-2 {
+		margin: 66px 0 41px;
+		text-transform: uppercase;
+	}
+
+	.info-page__list {
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			right: -8px;
+			top: 50%;
+			width: 453px;
+			height: 276px;
+			background-repeat: no-repeat;
+			background-position: right center;
+			transform: translateY(-50%);
+			background-size: contain;
+			background-position: center;
+		}
+
+		&:nth-of-type(1)::before {
+			background-image: url('./../../../assets/img/production/technologii.png');
+		}
+
+		&:nth-of-type(2)::before {
+			background-image: url('./../../../assets/img/production/premium.png');
+		}
+	}
+
+	@include table {
+
+		.info-page__list {
+			padding-top: 276px;
+
+			&::before {
+				left: -8px;
+				top: -20px;
+				right: auto;
+				transform: none;
+			}
+		}
+	}
+
+	@include mobile {
+		.production-page__slider {
+			margin: 60px 0 64px;
+		}
+
+		.title-2 {
+			margin: 50px 0 30px;
+		}
+
+		.info-page__list {
+			padding-top: 276px;
+
+			&::before {
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+	}
+
+	@media (max-width: 500px) {
+		.info-page__list {
+			padding-top: 61%;
+
+			&::before {
+				width: 100%;
+				padding-top: 61%;
+				height: auto;
+				left: 50%;
+				background-position: center;
+				background-size: contain;
+				transform: translateX(-50%);
+			}
+		}
+	}
+}

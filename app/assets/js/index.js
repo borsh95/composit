@@ -1,5 +1,9 @@
 //const { default: Swiper } = require("swiper");
 
+//const { default: Swiper } = require("swiper");
+
+window.onscroll = showHeader;
+
 //Hamburger
 (function () {
 	const hamburgerBtn = document.querySelector('.hamburger');
@@ -20,6 +24,7 @@
 		if (document.documentElement.clientWidth > 1197 && burgerBlock.classList.contains('active')) {
 			hamburgerBtn.classList.remove('active');
 			burgerBlock.classList.remove('active');
+			bodyEl.style.overflow = '';
 		}
 	});
 }());
@@ -41,6 +46,35 @@ if (document.querySelector('.slider-main')) {
 			disableOnInteraction: false,
 		},
 	});
+}
+
+//Слайдер производства
+if (document.querySelector('.production-slider')) {
+	const productionSlider = new Swiper('.production-slider', {
+		slidesPerView: 3,
+		spaceBetween: 32,
+		allowTouchMove: false,
+		navigation: {
+			nextEl: '.production-slider__arrow--right',
+			prevEl: '.production-slider__arrow--left',
+		},
+		breakpoints: {
+			320: {
+				slidesPerView: 1,
+			},
+			480: {
+				slidesPerView: 2,
+				spaceBetween: 20,
+			},
+			768: {
+				slidesPerView: 2,
+			},
+			1198: {
+				slidesPerView: 3,
+				spaceBetween: 32,
+			}
+		}
+	})
 }
 
 //Слайдер портфолио главной страницы
@@ -275,4 +309,14 @@ function backToTop() {
 
 	window.scrollBy(0, -45);
 	setTimeout(backToTop, 0);
+}
+
+function showHeader() {
+	const header = document.querySelector('header');
+
+	if (window.pageYOffset > 200) {
+		header.classList.add('fixed');
+	} else {
+		header.classList.remove('fixed');
+	}
 }
