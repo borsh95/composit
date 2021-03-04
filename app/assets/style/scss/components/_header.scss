@@ -16,7 +16,7 @@ header {
 		animation-duration: $duration;
 
 		& + * {
-			margin-top: 112px;
+			padding-top: 112px;
 		}
 	}
 
@@ -109,7 +109,7 @@ header {
 		height: 93px;
 
 		&.fixed + * {
-			margin-top: 93px;
+			padding-top: 93px;
 		}
 
 		.#{&}{

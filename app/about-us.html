@@ -6,8 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="ArtBro">
 	<title>Document</title>
-	<!--swiper css-->
-	<link rel="stylesheet" href="./assets/style/css/swiper-bundle.min.css">
 	<link rel="stylesheet" href="./assets/style/css/style.css">
 </head>
 
@@ -77,13 +75,20 @@
 				</div>
 				<div class="header__burger-block burger-block">
 					<nav class="header__menu menu">
-						<a class="menu__item" href="#">КАТАЛОГ</a>
+						<span class="menu__item menu__dropdown">
+							<span>КАТАЛОГ</span>
+							<span class="menu__dropdown-list">
+								<a class="menu__dropdown-item" href="./pool.html">Бассейны</a>
+								<a class="menu__dropdown-item" href="./kupeli.html">Купели</a>
+								<a class="menu__dropdown-item" href="./pavilions.html">Павильоны</a>
+							</span>
+						</span>
 						<a class="menu__item" href="./production.html">ПРОИЗВОДСТВО</a>
 						<span class="menu__item active">О НАС</span>
-						<a class="menu__item" href="#">УСТАНОВКА</a>
-						<a class="menu__item" href="#">ПОРТФОЛИО</a>
-						<a class="menu__item" href="#">СТАТЬИ</a>
-						<a class="menu__item" href="#">КОНТАКТЫ</a>
+						<a class="menu__item" href="./installing.html">УСТАНОВКА</a>
+						<a class="menu__item" href="./portfolio.html">ПОРТФОЛИО</a>
+						<a class="menu__item" href="./articles.html">СТАТЬИ</a>
+						<a class="menu__item" href="./contacts.html">КОНТАКТЫ</a>
 					</nav>
 					<div class="header__sci">
 						<a class="header__sci-item" href="#">
@@ -102,6 +107,7 @@
 				</div>
 			</div>
 		</header>
+		<div class="expansion-container"></div>
 		<!-- bread-crumb -->
 		<div class="bread-crumb">
 			<div class="container">
@@ -196,7 +202,6 @@
 			</div>
 		</footer>
 	</div>
-	<script src="assets/js/swiper-bundle.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 

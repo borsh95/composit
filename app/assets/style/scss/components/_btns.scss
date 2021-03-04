@@ -69,7 +69,7 @@
 	font-weight: 300;
 	color: $color3;
 	background-color: $color1;
-	box-shadow: 0 0 7px rgba(#000, 0.51);
+	box-shadow: 0 0 7px rgba(#000, 0.21);
 
 	&:hover {
 		color: $color1;
@@ -79,6 +79,33 @@
 
 	@include mobile {
 		font-size: 15.3px;
+	}
+}
+
+.btn-bg--white-large {
+	@extend %comonStyle;
+	padding: 0 36px;
+	min-width: 275px;
+	height: 66px;
+	font-size: 25px;
+	line-height: 66px;
+	font-weight: 300;
+	color: #2f2f2f;
+	background-color: $color1;
+	box-shadow: 0 0 21px rgba($lightColor2, 0.51);
+	transition-property: background-color, color;
+	transition-duration: $duration;
+
+	&:hover {
+		background-color: $color3;
+		color: #fff;
+	}
+
+	@include mobile {
+		padding: 0 28px;
+		height: 53px;
+		font-size: 20px;
+		line-height: 53px;
 	}
 }
 
