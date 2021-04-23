@@ -302,6 +302,10 @@ function sliderToggle(selectorSlider, param, breakPoint) {
 (function () {
 	const btnDown = document.querySelector('.v-up');
 	let vUpTriggerTimer = 0;
+	
+	setTimeout(() => {
+		console.log(vUpTriggerTimer)
+	}, 3000)
 
 	vUp(btnDown, scroledWindow);
 
