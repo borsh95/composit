@@ -35,6 +35,21 @@ if (document.querySelector('.menu__dropdown')) {
 	dropdown('.menu__dropdown', '.menu__dropdown-list');
 }
 
+//v-modal
+if (document.querySelector('.v-modal')) {
+	const modalEl = document.querySelector('.v-modal');
+	const typeOpenModal = 'openModal';
+
+	document.addEventListener('click', function (e) {
+		if (e.target.dataset.buttonType === typeOpenModal) {
+			modalEl.classList.add('active');
+		}
+		else if (e.target.classList.contains('v-modal')) {
+			modalEl.classList.remove('active');
+		}
+	});
+}
+
 //Слайдер главный
 if (document.querySelector('.slider-main')) {
 	let sliderMain = document.querySelector('.slider-main');
@@ -302,7 +317,7 @@ function sliderToggle(selectorSlider, param, breakPoint) {
 (function () {
 	const btnDown = document.querySelector('.v-up');
 	let vUpTriggerTimer = 0;
-	
+
 	setTimeout(() => {
 		console.log(vUpTriggerTimer)
 	}, 3000)

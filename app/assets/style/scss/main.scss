@@ -556,6 +556,215 @@ main {
 	}
 }
 
+/*PRODUCT FULL*/
+.product-full {
+	&__name {
+		margin-bottom: 70px;
+	}
+
+	&__content {
+		display: flex;
+
+		#msGallery {
+			min-width: 50%;
+		}
+	}
+
+	&__info {
+		margin-left: 85px;
+	}
+
+	&__price {
+		margin-top: 45px;
+		font-weight: 300;
+		font-size: 29px;
+		line-height: (27/29);
+		color: $lightColor2;
+		text-transform: uppercase;
+
+		&-val {
+			white-space: nowrap;
+		}
+	}
+
+	&__btn-buy {
+		margin-top: 30px;
+	}
+
+	&__desc {
+		$this: &;
+
+		margin-top: 95px;
+
+		&-list {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0 0 -20px -70px;
+		}
+
+		&-item {
+			display: flex;
+			align-items: flex-end;
+			margin: 0 0 20px 50px;
+			min-width: 185px;
+		}
+
+		&-col {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-width: 115px;
+		}
+
+		&-img {
+			$parent: #{$this}-item;
+
+			background-repeat: no-repeat;
+			background-size: contain;
+
+			#{$parent}--length & {
+				width: 50px;
+			}
+			#{$parent}--width & {
+				width: 16px;
+			}
+			#{$parent}--capacity & {
+				width: 26px;
+			}
+			#{$parent}--vol & {
+				width: 25px;
+			}
+			#{$parent}--bake & {
+				width: 27px;
+			}
+		}
+
+		&-name {
+			margin-top: 3px;
+			font-weight: 300;
+			font-size: 16px;
+			line-height: 1;
+			color: $lightColor2;
+		}
+
+		&-text {
+			margin: 0 0 8px 7px;
+		}
+	}
+
+	&__text {
+		margin: 55px 0 40px;
+	}
+
+	&__products-similar {
+		margin-top: 90px;
+	}
+
+	@include table {
+		&__name {
+			margin-bottom: 50px;
+		}
+
+		&__content {
+			flex-direction: column;
+		}
+
+		&__slider {
+			margin-left: auto !important;
+			margin: 0 auto;
+			max-width: 460px
+		}
+	
+		&__info {
+			margin: 30px 0 0 0;
+		}
+	
+		&__price {
+			margin-top: 35px;
+			font-size: 24px;
+		}
+	
+		&__btn-buy {
+			margin-top: 25px;
+		}
+
+		&__desc {
+			margin-top: 60px;
+	
+			&-list {
+				margin: 0 0 -20px -30px;
+			}
+	
+			&-item {
+				margin: 0 0 15px 30px;
+			}
+		}
+	
+		&__text {
+			margin: 45px 0 30px;
+		}
+	
+		&__products-similar {
+			margin-top: 70px;
+		}
+	}
+
+	@include mobile {
+		&__desc {
+			$this: &;
+	
+			margin-top: 50px;
+	
+			&-list {
+				margin: 0 0 -20px -30px;
+			}
+	
+			&-item {
+				margin: 0 0 15px 30px;
+			}
+		}
+	}
+}
+
+.fotorama {
+	margin-left: -15px;
+	padding: 15px 15px 0;
+
+	&__stage {
+		box-shadow: 0 0 13px rgba(62, 181, 241, 0.31);
+	}
+
+	img {
+		height: 90%;
+	}
+
+	&__arr {
+		&--next {
+			background: url('./../../img/icons/prod-slider-arr.png') no-repeat center;
+		}
+
+		&--prev {
+			background: url('./../../img/icons/prod-slider-arr-2.png') no-repeat center;
+		}
+	}
+
+	&__nav {
+		text-align: left;
+	}
+
+	&__thumb-border {
+		border-color: $lightColor2;
+	}
+
+	&__nav-wrap {
+		margin-top: 35px;
+	}
+
+	&__thumb {
+		background-color: transparent;
+	}
+}
+
 /*Бассейны страница*/
 .pool-page	{
 	.products__title {

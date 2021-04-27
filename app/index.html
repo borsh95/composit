@@ -11,6 +11,22 @@
 </head>
 
 <body>
+	<!------- modal window --------->
+	<div class="v-modal">
+		<form action="#" class="v-form">
+			<h4 class="v-form__title">Заказать</h4>
+			<div class="v-form__input-wrap input-name">
+				<input class="v-form__input" type="text" name="username" placeholder="Имя">
+			</div>
+			<div class="v-form__input-wrap input-tel">
+				<input class="v-form__input" type="tel" name="tel" placeholder="Телефон">
+			</div>
+			<div class="v-form__input-wrap input-email">
+				<input class="v-form__input" type="email" name="email" placeholder="Промокод">
+			</div>
+			<button class="v-form__btn btn-bg--colorful" type="submit">Отправить</button>
+		</form>
+	</div>
 	<div class="global-wrap main-page">
 		<!-- arrow-down -->
 		<div class="v-up">
@@ -231,7 +247,8 @@
 									</div>
 									<div class="product__btns">
 										<a class="product__btn-buy btn-bg--white" href="#">Подробнее</a>
-										<a class="product__btn-detail btn-bg--colorful" href="#">Купить</a>
+										<button class="product__btn-detail btn-bg--colorful"
+											data-button-type="openModal">Купить</button>
 									</div>
 								</div>
 							</div>
@@ -288,7 +305,8 @@
 									</div>
 									<div class="product__btns">
 										<a class="product__btn-buy btn-bg--white" href="#">Подробнее</a>
-										<a class="product__btn-detail btn-bg--colorful" href="#">Купить</a>
+										<button class="product__btn-detail btn-bg--colorful"
+											data-button-type="openModal">Купить</button>
 									</div>
 								</div>
 							</div>
@@ -338,7 +356,8 @@
 									</div>
 									<div class="product__btns">
 										<a class="product__btn-buy btn-bg--white" href="#">Подробнее</a>
-										<a class="product__btn-detail btn-bg--colorful" href="#">Купить</a>
+										<button class="product__btn-detail btn-bg--colorful"
+											data-button-type="openModal">Купить</button>
 									</div>
 								</div>
 							</div>
@@ -388,7 +407,8 @@
 									</div>
 									<div class="product__btns">
 										<a class="product__btn-buy btn-bg--white" href="#">Подробнее</a>
-										<a class="product__btn-detail btn-bg--colorful" href="#">Купить</a>
+										<button class="product__btn-detail btn-bg--colorful"
+											data-button-type="openModal">Купить</button>
 									</div>
 								</div>
 							</div>
