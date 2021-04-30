@@ -571,11 +571,85 @@ main {
 	}
 
 	&__info {
-		margin-left: 85px;
+		margin-left: 55px;
+
+		.product-full__text {
+			margin: 60px 0 20px;
+		}
+
+		.text:not(:first-child) {
+			margin-top: 30px;
+		}
+	}
+
+	&__table-wrap {
+		margin-top: 85px;
+		padding: 2px 0 0 2px;
+	}
+
+	&__table {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: (18/16);
+		border-collapse: collapse;
+
+		thead {
+			outline: 1px solid $lightColor2;
+
+			th {
+				font-weight: 400;
+			}
+
+			th {
+				padding: 5px;
+			}
+
+			th:not(:last-child) {
+				border-right: 1px solid $lightColor2;	
+			}
+		}
+
+		tr {
+			height: 72px;
+		}
+
+		tbody {
+			text-align: center;
+			vertical-align: middle;
+			border: 1px solid #e8e8e8;
+			border-left: none;
+			border-top: none;
+
+			&::before {
+				content: "_";
+				line-height: 12px;
+				color: transparent;
+			}
+
+			td {
+				border-left: 1px solid #e8e8e8;
+				border-top: 1px solid #e8e8e8;
+			}
+		}
+	}
+
+	&__counting {
+		margin-top: 20px;
+		font-weight: 300;
+		font-size: 18px;
+		line-height: (30/18);
+	}
+
+	&__payment {
+		flex-wrap: wrap;
+		margin: 45px 0 -30px -45px;
+
+		& > * {
+			margin: 0 0 30px 45px;
+		}
 	}
 
 	&__price {
-		margin-top: 45px;
 		font-weight: 300;
 		font-size: 29px;
 		line-height: (27/29);
@@ -585,10 +659,6 @@ main {
 		&-val {
 			white-space: nowrap;
 		}
-	}
-
-	&__btn-buy {
-		margin-top: 30px;
 	}
 
 	&__desc {
@@ -607,6 +677,7 @@ main {
 			align-items: flex-end;
 			margin: 0 0 20px 50px;
 			min-width: 185px;
+			font-size: 19.8px;
 		}
 
 		&-col {
@@ -637,19 +708,47 @@ main {
 			#{$parent}--bake & {
 				width: 27px;
 			}
+			#{$parent}--depth & {
+				width: 34px;
+			}
 		}
 
 		&-name {
 			margin-top: 3px;
 			font-weight: 300;
-			font-size: 16px;
+			font-size: 0.8em;
 			line-height: 1;
 			color: $lightColor2;
 		}
 
 		&-text {
 			margin: 0 0 8px 7px;
+			font-weight: 700;
 		}
+
+		// this = product-full__desc
+		&--small {
+			#{$this}-list {
+				margin: 0 0 -25px -30px;
+			}
+
+			#{$this}-item {
+				margin: 0 0 25px 30px;
+				min-width: 150px;
+			}
+
+			#{$this}-col {
+				min-width: 60px;
+			}
+		}
+	}
+
+	&__palette {
+		margin-top: 25px;
+	}
+
+	&__prod-addition {
+		margin: 40px 0;
 	}
 
 	&__text {
@@ -679,13 +778,16 @@ main {
 			margin: 30px 0 0 0;
 		}
 	
-		&__price {
-			margin-top: 35px;
-			font-size: 24px;
-		}
+		&__payment {
+			margin: 30px 0 -30px -35px;
 	
-		&__btn-buy {
-			margin-top: 25px;
+			& > * {
+				margin: 0 0 30px 35px;
+			}
+		}
+
+		&__price {
+			font-size: 24px;
 		}
 
 		&__desc {
@@ -699,7 +801,25 @@ main {
 				margin: 0 0 15px 30px;
 			}
 		}
-	
+
+		&__palette {
+			margin-top: 70px;
+		}
+		
+		&__table-wrap {
+			margin-top: 65px;
+			overflow-x: auto;
+		}
+
+		&__table {
+			min-width: 900px;
+			font-size: 14px;
+			
+			tr {
+				height: 40px;
+			}
+		}
+
 		&__text {
 			margin: 45px 0 30px;
 		}
@@ -710,6 +830,10 @@ main {
 	}
 
 	@include mobile {
+		&__name {
+			margin-bottom: 30px;
+		}
+
 		&__desc {
 			$this: &;
 	
@@ -721,6 +845,20 @@ main {
 	
 			&-item {
 				margin: 0 0 15px 30px;
+				font-size: 16px;
+			}
+		}
+
+		&__table-wrap {
+			margin-top: 35px;
+		}
+
+		&__table {
+			min-width: 850px;
+			font-size: 12px;
+			
+			tr {
+				height: 30px;
 			}
 		}
 	}
@@ -728,7 +866,7 @@ main {
 
 .fotorama {
 	margin-left: -15px;
-	padding: 15px 15px 0;
+	padding: 15px;
 
 	&__stage {
 		box-shadow: 0 0 13px rgba(62, 181, 241, 0.31);

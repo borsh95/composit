@@ -152,6 +152,133 @@ if (document.querySelector('.gallery')) {
 	sliderToggle('.gallery', parameters, 1197);
 }
 
+
+//слайдер палитры
+if (document.querySelector('.palette')) {
+	let gallery = galleryPalette('.palette');
+
+	let slider = new Swiper('.palette__thumbs-slider', {
+		spaceBetween: 40,
+		allowTouchMove: false,
+		navigation: {
+			nextEl: '.palette__thumbs-arrow--next',
+			prevEl: '.palette__thumbs-arrow--prev',
+		},
+	});
+
+	gallery.thumbHadler(document.querySelectorAll('[data-gallery="thumb"]')[0]);
+
+	//Галлерея картинок
+	function galleryPalette(selector) {
+		const $el = document.querySelector(selector),
+			full = $el.querySelector('[data-gallery="view"]'),
+			fullBtnPrev = full.querySelector('[data-gallery="btn-prev"]'),
+			fullBtnNext = full.querySelector('[data-gallery="btn-next"]'),
+			thumbsArr = Array.from($el.querySelectorAll('[data-gallery="thumb"]')) || [];
+
+		let request,
+			current,
+			thumbActiveIndex,
+			cahe = {};
+
+		$el.addEventListener('click', clickHandler);
+
+		function clickHandler(event) {
+			const target = event.target;
+			const type = target.dataset.gallery;
+
+			if (type === 'thumb') {
+				event.preventDefault();
+				thumbHadler(target);
+			}
+			else if (type === 'btn-prev') {
+				if (thumbActiveIndex === 0) return;
+				thumbHadler(thumbsArr[--thumbActiveIndex]);
+			}
+			else if (type === 'btn-next') {
+				if (thumbActiveIndex === (thumbsArr.length - 1)) return;
+				thumbHadler(thumbsArr[++thumbActiveIndex]);
+				let t2 = performance.now();
+			}
+		}
+
+		function thumbHadler(thumb) {
+			let src = thumb.getAttribute("href");
+			request = src;
+			thumbActiveIndex = thumbsArr.indexOf(thumb);
+
+			if (thumbActiveIndex === 0) {
+				if (fullBtnPrev.classList.contains('disabled')) return;
+				fullBtnPrev.classList.add('disabled');
+				fullBtnPrev.setAttribute('disabled', 'true');
+			}
+			else if (thumbActiveIndex !== 0 && fullBtnPrev.classList.contains('disabled')) {
+				fullBtnPrev.classList.remove('disabled');
+				fullBtnPrev.removeAttribute('disabled');
+			}
+
+			if (thumbActiveIndex === thumbsArr.length - 1) {
+				if (fullBtnNext.classList.contains('disabled')) return;
+				fullBtnNext.classList.add('disabled');
+				fullBtnNext.setAttribute('disabled', 'true');
+			}
+			else if (thumbActiveIndex !== (thumbsArr.length - 1) && fullBtnNext.classList.contains('disabled')) {
+				fullBtnNext.classList.remove('disabled');
+				fullBtnNext.removeAttribute('disabled');
+			}
+
+			setActiveThumb(thumb);
+
+			if (src in cahe) {
+				if (!cahe[src].isLoading) {
+					crossfade(cahe[src].img)
+				}
+			} else {
+				renderImg(src);
+			}
+		}
+
+		function renderImg(src) {
+			const img = document.createElement('img');
+
+			cahe[src] = {
+				img: img,
+				isLoading: true,
+			}
+
+			full.classList.add('is-loading');
+			full.append(img);
+			img.setAttribute('src', src);
+			img.style.display = 'none';
+
+			img.onload = function () {
+				full.classList.remove('is-loading');
+				cahe[src].isLoading = false;
+
+				if (request === src) crossfade(img);
+			}
+		}
+
+		function setActiveThumb(thumb) {
+			if (thumb.classList.contains('active')) return;
+
+			$el.querySelector('[data-gallery="thumb"].active').classList.remove('active');
+			thumb.classList.add('active');
+		}
+
+		function crossfade(img) {
+			if (current) current.style.display = 'none';
+
+			img.style.display = '';
+			current = img;
+		}
+
+		return {
+			thumbHadler
+		}
+	}
+}
+
 //слайдер цены
 if (document.querySelector('.filters-price__slider')) {
 	const sliderPrice = document.querySelector('.filters-price__slider');
@@ -317,10 +444,6 @@ function sliderToggle(selectorSlider, param, breakPoint) {
 (function () {
 	const btnDown = document.querySelector('.v-up');
 	let vUpTriggerTimer = 0;
-
-	setTimeout(() => {
-		console.log(vUpTriggerTimer)
-	}, 3000)
 
 	vUp(btnDown, scroledWindow);
 
